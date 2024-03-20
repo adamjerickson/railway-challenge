@@ -33,7 +33,15 @@ async function stopDiscordClient() {
 }
 
 async function connectToLocalServer() {
-  const ws = new WebSocket("ws://localhost:8080");
+  const mode = process.env.MODE;
+
+  const url =
+    mode === "development"
+      ? "ws://localhost:3000/websocket"
+      : "ws://railway-challenge-production.up.railway.app/websocket";
+
+  const ws = new WebSocket(url);
+
   ws.addEventListener("open", function open() {
     console.log("Connected to local server");
   });
@@ -243,6 +251,7 @@ async function setupMessageHandling() {
           JSON.stringify({
             author: d.author.global_name,
             content: d.content,
+            timestamp: d.timestamp,
           })
         );
     }

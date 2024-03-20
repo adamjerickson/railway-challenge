@@ -1,11 +1,18 @@
-const socket = new WebSocket(`ws://0.0.0.0:${process.env.PORT}`);
+let mode = location.href.includes("localhost") ? "development" : "production";
+
+const url =
+  mode === "development"
+    ? "ws://localhost:3000/websocket"
+    : "ws://railway-challenge-production.up.railway.app/websocket";
+
+const socket = new WebSocket(url);
 
 socket.addEventListener("open", function (event) {
   console.log("Connected to WebSocket server");
 });
 
 socket.addEventListener("message", function (event) {
-  const { author, content } = JSON.parse(event.data);
+  const { author, content, timestamp } = JSON.parse(event.data);
 
   // Remove the placeholder if it exists
   const placeholder = document.getElementById("placeholder");
@@ -18,14 +25,25 @@ socket.addEventListener("message", function (event) {
   contentSpan.className = "message-content";
   contentSpan.textContent = content;
 
+  const authorAndContent = document.createElement("div");
+
   const authorSpan = document.createElement("span");
   authorSpan.className = "message-author";
   authorSpan.textContent = `${author}: `;
 
   const messageItem = document.createElement("div");
   messageItem.className = "message";
-  messageItem.appendChild(authorSpan);
-  messageItem.appendChild(contentSpan);
+  authorAndContent.appendChild(authorSpan);
+  authorAndContent.appendChild(contentSpan);
+
+  const timeSpan = document.createElement("span");
+  timeSpan.className = "message-time";
+  const date = new Date(timestamp);
+  const ampm = date.getHours() > 12 ? "PM" : "AM";
+  timeSpan.textContent = dateFns.format(date, "h:mm") + " " + ampm;
+
+  messageItem.appendChild(authorAndContent);
+  messageItem.appendChild(timeSpan);
 
   messagesList.appendChild(messageItem);
 });
