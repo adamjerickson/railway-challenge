@@ -5,7 +5,7 @@ const state = {
   resumeGatewayUrl: null,
   sessionId: null,
   sequence: 0,
-  token: "",
+  token: process.env.DISCORD_TOKEN,
   ws: null,
   running: true,
   heartbeatInterval: 20000, // Default value. Will be updated by the server.

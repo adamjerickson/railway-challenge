@@ -1,8 +1,26 @@
 const WebSocket = require("ws");
+const express = require("express");
 const { startDiscordClient, stopDiscordClient } = require("./discordClient");
 
 // Create a WebSocket server
 const wss = new WebSocket.Server({ port: 8080 });
+
+// Create an Express server
+const app = express();
+app.use(express.static(__dirname + "/public"));
+
+// Serve the index.html file
+app.get("/", (req, res) => {
+  res.sendFile("index.html");
+});
+
+// Define port for Express server
+const PORT = process.env.PORT || 3000;
+
+// Start Express server
+const server = app.listen(PORT, () => {
+  console.log(`Express server is running on port ${PORT}`);
+});
 
 // Main method to handle WebSocket connections
 function main() {
