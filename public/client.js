@@ -58,4 +58,4 @@ socket.addEventListener("close", function (event) {
 
 setInterval(() => {
   console.log("client running");
-}, 10_000);
+}, 100_000);

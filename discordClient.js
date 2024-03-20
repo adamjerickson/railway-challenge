@@ -89,7 +89,7 @@ async function connectToDiscord() {
     console.log("Connected to Discord.");
   });
 
-  //$$$$  Keep the script running.
+  // Keep connected to Discord.
   setInterval(() => {
     if (ws.readyState !== 1) {
       console.log("Discord websocket not connected. Will not send heartbeat.");
@@ -97,7 +97,6 @@ async function connectToDiscord() {
     } else {
       ws.send(JSON.stringify({ op: 1, d: null })); // opcode 1 is for heartbeat.
     }
-    ws.send(JSON.stringify({ op: 1, d: null })); // opcode 1 is for heartbeat.
   }, state.heartbeatInterval);
 }
 
