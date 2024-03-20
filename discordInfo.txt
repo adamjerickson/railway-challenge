@@ -1,0 +1,6 @@
+discord application id
+1218941675033071716
+
+public key
+6ca90f8d5a0cc33941a10e3d6d5cc410a8bce1c20fad696c88b2e6626b7856d8
+
