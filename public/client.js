@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://localhost:8080");
+const socket = new WebSocket(`ws://0.0.0.0:${process.env.PORT}`);
 
 socket.addEventListener("open", function (event) {
   console.log("Connected to WebSocket server");
