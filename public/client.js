@@ -3,7 +3,7 @@ let mode = location.href.includes("localhost") ? "development" : "production";
 const url =
   mode === "development"
     ? "ws://localhost:3000/websocket"
-    : "ws://railway-challenge-production.up.railway.app/websocket";
+    : "ws://railway-challenge.railway.internal/websocket";
 
 const socket = new WebSocket(url);
 
