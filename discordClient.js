@@ -38,7 +38,7 @@ async function connectToLocalServer() {
   const url =
     mode === "development"
       ? "ws://localhost:3000/websocket"
-      : "ws://railway-challenge.railway.internal/websocket";
+      : `ws://0.0.0.0:${process.env.PORT}/websocket`;
 
   const ws = new WebSocket(url);
 
